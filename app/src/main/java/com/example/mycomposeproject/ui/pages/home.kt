@@ -14,6 +14,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.mycomposeproject.ui.pages.simple.button.ButtonPage
+import com.example.mycomposeproject.ui.pages.simple.dialog.DialogPage
 import com.example.mycomposeproject.ui.pages.simple.icon.IconPage
 import com.example.mycomposeproject.ui.pages.simple.image.ImagePage
 import com.example.mycomposeproject.ui.pages.simple.selector.SelectorPage
@@ -48,6 +49,9 @@ fun HomeNav() {
             }
             composable("selector_page") {
                 SelectorPage()
+            }
+            composable("dialog_page") {
+                DialogPage()
             }
         }
     }
@@ -89,6 +93,11 @@ fun HomePage(navController: NavHostController) {
             navController.navigate("selector_page")
         }) {
             Text(text = "选择器组件")
+        }
+        Button(onClick = {
+            navController.navigate("dialog_page")
+        }) {
+            Text(text = "弹窗组件")
         }
     }
 }
