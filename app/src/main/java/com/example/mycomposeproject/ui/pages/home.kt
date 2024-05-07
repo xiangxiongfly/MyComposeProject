@@ -13,6 +13,9 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.mycomposeproject.ui.pages.layout.ColumnRowPage
+import com.example.mycomposeproject.ui.pages.layout.ConstraintLayoutPage
+import com.example.mycomposeproject.ui.pages.layout.SurfacePage
 import com.example.mycomposeproject.ui.pages.simple.button.ButtonPage
 import com.example.mycomposeproject.ui.pages.simple.dialog.DialogPage
 import com.example.mycomposeproject.ui.pages.simple.icon.IconPage
@@ -52,6 +55,21 @@ fun HomeNav() {
             }
             composable("dialog_page") {
                 DialogPage()
+            }
+            composable("column_row_page") {
+                ColumnRowPage()
+            }
+            composable("surface_page") {
+                SurfacePage()
+            }
+            composable("constraint_layout_page") {
+                ConstraintLayoutPage()
+            }
+            composable("composition_local_page") {
+                CompositionLocalPage()
+            }
+            composable("state_page") {
+                CounterScreen()
             }
         }
     }
@@ -98,6 +116,31 @@ fun HomePage(navController: NavHostController) {
             navController.navigate("dialog_page")
         }) {
             Text(text = "弹窗组件")
+        }
+        Button(onClick = {
+            navController.navigate("column_row_page")
+        }) {
+            Text(text = "Column&Row")
+        }
+        Button(onClick = {
+            navController.navigate("surface_page")
+        }) {
+            Text(text = "Surface")
+        }
+        Button(onClick = {
+            navController.navigate("constraint_layout_page")
+        }) {
+            Text(text = "ConstraintLayout")
+        }
+        Button(onClick = {
+            navController.navigate("composition_local_page")
+        }) {
+            Text(text = "CompositionLocal")
+        }
+        Button(onClick = {
+            navController.navigate("state_page")
+        }) {
+            Text(text = "状态管理")
         }
     }
 }

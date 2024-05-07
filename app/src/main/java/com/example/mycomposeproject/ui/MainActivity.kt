@@ -2,12 +2,15 @@ package com.example.mycomposeproject.ui
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
+import androidx.activity.compose.BackHandler
 import androidx.activity.compose.setContent
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Home
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -18,14 +21,17 @@ import com.example.mycomposeproject.ui.pages.HomeNav
 import com.example.mycomposeproject.ui.pages.ThreePage
 import com.example.mycomposeproject.ui.pages.TwoPage
 import com.example.mycomposeproject.ui.theme.MyComposeProjectTheme
+import kotlinx.coroutines.launch
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
+            val scaffoldState = rememberScaffoldState()
+            val scope = rememberCoroutineScope()
             val tabs = Tabs.values()
-            var position by remember { mutableStateOf(Tabs.HOME) }
-            var title by remember { mutableStateOf(position.title) }
+            var selectedPosition by remember { mutableStateOf(Tabs.HOME) }
+            var title by remember { mutableStateOf(selectedPosition.title) }
             MyComposeProjectTheme {
                 Surface(
                     modifier = Modifier.fillMaxSize(),
@@ -33,17 +39,31 @@ class MainActivity : ComponentActivity() {
                 ) {
                     // 脚手架
                     Scaffold(
+                        scaffoldState = scaffoldState,
                         // 标题栏
                         topBar = {
-                            TopAppBar(title = { Text(title) })
+                            TopAppBar(
+                                title = { Text(title) },
+                                navigationIcon = {
+                                    IconButton(onClick = {
+                                        scope.launch { scaffoldState.drawerState.open() }
+                                    }) {
+                                        Icon(Icons.Filled.Home, null)
+                                    }
+                                }
+                            )
+                        },
+                        // 侧边栏
+                        drawerContent = {
+                            Text("hello world")
                         },
                         // 底部导航栏
                         bottomBar = {
                             BottomNavigation(backgroundColor = Color.White) {
                                 tabs.forEach { tab ->
                                     BottomNavigationItem(
-                                        selected = position == tab,
-                                        onClick = { position = tab },
+                                        selected = selectedPosition == tab,
+                                        onClick = { selectedPosition = tab },
                                         icon = { Icon(painterResource(tab.iconRes), null) },
                                         label = { Text(tab.title) },
                                         alwaysShowLabel = false,
@@ -56,13 +76,19 @@ class MainActivity : ComponentActivity() {
                     ) { paddingValues ->
                         // 内容
                         Box(modifier = Modifier.padding(paddingValues)) {
-                            when (position) {
+                            when (selectedPosition) {
                                 Tabs.HOME -> HomeNav()
                                 Tabs.TWO -> TwoPage()
                                 Tabs.THREE -> ThreePage()
                                 Tabs.FOUR -> FourPage()
                             }
-                            title = position.title
+                            title = selectedPosition.title
+                        }
+                    }
+                    // 拦截系统返回键
+                    BackHandler(enabled = scaffoldState.drawerState.isOpen) {
+                        scope.launch {
+                            scaffoldState.drawerState.close()
                         }
                     }
                 }
