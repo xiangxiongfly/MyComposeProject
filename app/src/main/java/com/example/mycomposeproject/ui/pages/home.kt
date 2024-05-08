@@ -4,6 +4,8 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Button
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -16,6 +18,7 @@ import androidx.navigation.compose.rememberNavController
 import com.example.mycomposeproject.ui.pages.layout.ColumnRowPage
 import com.example.mycomposeproject.ui.pages.layout.ConstraintLayoutPage
 import com.example.mycomposeproject.ui.pages.layout.SurfacePage
+import com.example.mycomposeproject.ui.pages.other.RecomposePage
 import com.example.mycomposeproject.ui.pages.simple.button.ButtonPage
 import com.example.mycomposeproject.ui.pages.simple.dialog.DialogPage
 import com.example.mycomposeproject.ui.pages.simple.icon.IconPage
@@ -27,7 +30,9 @@ import com.example.mycomposeproject.ui.pages.simple.textfield.TextFieldPage
 @Composable
 fun HomeNav() {
     Box(
-        modifier = Modifier.fillMaxSize(),
+        modifier = Modifier
+            .fillMaxSize()
+            .verticalScroll(rememberScrollState()),
         contentAlignment = Alignment.Center
     ) {
         val navController = rememberNavController()
@@ -70,6 +75,9 @@ fun HomeNav() {
             }
             composable("state_page") {
                 CounterScreen()
+            }
+            composable("recompose_page") {
+                RecomposePage()
             }
         }
     }
@@ -141,6 +149,11 @@ fun HomePage(navController: NavHostController) {
             navController.navigate("state_page")
         }) {
             Text(text = "状态管理")
+        }
+        Button(onClick = {
+            navController.navigate("recompose_page")
+        }) {
+            Text(text = "重组")
         }
     }
 }
