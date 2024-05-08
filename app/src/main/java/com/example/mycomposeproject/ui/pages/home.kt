@@ -18,6 +18,7 @@ import androidx.navigation.compose.rememberNavController
 import com.example.mycomposeproject.ui.pages.layout.ColumnRowPage
 import com.example.mycomposeproject.ui.pages.layout.ConstraintLayoutPage
 import com.example.mycomposeproject.ui.pages.layout.SurfacePage
+import com.example.mycomposeproject.ui.pages.other.LifecyclePage
 import com.example.mycomposeproject.ui.pages.other.RecomposePage
 import com.example.mycomposeproject.ui.pages.simple.button.ButtonPage
 import com.example.mycomposeproject.ui.pages.simple.dialog.DialogPage
@@ -78,6 +79,9 @@ fun HomeNav() {
             }
             composable("recompose_page") {
                 RecomposePage()
+            }
+            composable("lifecycle_page") {
+                LifecyclePage()
             }
         }
     }
@@ -154,6 +158,11 @@ fun HomePage(navController: NavHostController) {
             navController.navigate("recompose_page")
         }) {
             Text(text = "重组")
+        }
+        Button(onClick = {
+            navController.navigate("lifecycle_page")
+        }) {
+            Text(text = "生命周期")
         }
     }
 }
