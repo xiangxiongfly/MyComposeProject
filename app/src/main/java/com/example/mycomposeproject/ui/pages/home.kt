@@ -15,6 +15,9 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.mycomposeproject.ui.pages.animation.AnimationPage
+import com.example.mycomposeproject.ui.pages.animation.high_level.AnimatedContentPage
+import com.example.mycomposeproject.ui.pages.animation.high_level.AnimatedVisibilityPage
 import com.example.mycomposeproject.ui.pages.layout.ColumnRowPage
 import com.example.mycomposeproject.ui.pages.layout.ConstraintLayoutPage
 import com.example.mycomposeproject.ui.pages.layout.SurfacePage
@@ -32,19 +35,21 @@ import com.example.mycomposeproject.ui.pages.simple.textfield.TextFieldPage
 fun HomeNav() {
     Box(
         modifier = Modifier
-            .fillMaxSize()
-            .verticalScroll(rememberScrollState()),
+            .fillMaxSize(),
         contentAlignment = Alignment.Center
     ) {
         val navController = rememberNavController()
-        NavHost(navController = navController, startDestination = "home_page") {
+        NavHost(
+            navController = navController,
+            startDestination = "home_page"
+        ) {
             composable("home_page") {
                 HomePage(navController)
             }
             composable("text_page") {
                 TextPage()
             }
-            composable("textfield_page") {
+            composable("text_field_page") {
                 TextFieldPage()
             }
             composable("icon_page") {
@@ -83,6 +88,18 @@ fun HomeNav() {
             composable("lifecycle_page") {
                 LifecyclePage()
             }
+            composable("animation_page") {
+                AnimationPage(
+                    { navController.navigate("animated_visibility_page") },
+                    { navController.navigate("animated_content_page") }
+                )
+            }
+            composable("animated_visibility_page") {
+                AnimatedVisibilityPage()
+            }
+            composable("animated_content_page") {
+                AnimatedContentPage()
+            }
         }
     }
 }
@@ -90,8 +107,10 @@ fun HomeNav() {
 @Composable
 fun HomePage(navController: NavHostController) {
     Column(
-        modifier = Modifier.fillMaxSize(),
-        verticalArrangement = Arrangement.Center,
+        modifier = Modifier
+            .fillMaxSize()
+            .verticalScroll(rememberScrollState()),
+        verticalArrangement = Arrangement.Top,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Button(onClick = {
@@ -100,7 +119,7 @@ fun HomePage(navController: NavHostController) {
             Text(text = "Text组件")
         }
         Button(onClick = {
-            navController.navigate("textfield_page")
+            navController.navigate("text_field_page")
         }) {
             Text(text = "TextField组件")
         }
@@ -163,6 +182,11 @@ fun HomePage(navController: NavHostController) {
             navController.navigate("lifecycle_page")
         }) {
             Text(text = "生命周期")
+        }
+        Button(onClick = {
+            navController.navigate("animation_page")
+        }) {
+            Text(text = "动画")
         }
     }
 }

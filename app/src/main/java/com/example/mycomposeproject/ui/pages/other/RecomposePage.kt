@@ -25,6 +25,15 @@ fun RecomposePage() {
             Log.e("TAG", "Text run")
             return@run "$counter"
         })
+        Button(onClick = run {
+            Log.e("TAG", "Button2 Scope")
+            return@run {
+
+            }
+        }) {
+            Log.e("TAG", "Scope-5 run")
+            Text("hello2")
+        }
     }
 }
 
