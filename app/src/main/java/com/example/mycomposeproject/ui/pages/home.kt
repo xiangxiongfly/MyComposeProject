@@ -15,9 +15,13 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.example.mycomposeproject.ui.pages.animation.AnimationPage
+import com.example.mycomposeproject.ui.pages.animation.MyAnimationPage
 import com.example.mycomposeproject.ui.pages.animation.high_level.AnimatedContentPage
 import com.example.mycomposeproject.ui.pages.animation.high_level.AnimatedVisibilityPage
+import com.example.mycomposeproject.ui.pages.animation.high_level.CrossfadePage
+import com.example.mycomposeproject.ui.pages.animation.low_level.*
+import com.example.mycomposeproject.ui.pages.animation.spec.SpringPage
+import com.example.mycomposeproject.ui.pages.animation.spec.TweenPage
 import com.example.mycomposeproject.ui.pages.layout.ColumnRowPage
 import com.example.mycomposeproject.ui.pages.layout.ConstraintLayoutPage
 import com.example.mycomposeproject.ui.pages.layout.SurfacePage
@@ -88,10 +92,18 @@ fun HomeNav() {
             composable("lifecycle_page") {
                 LifecyclePage()
             }
-            composable("animation_page") {
-                AnimationPage(
+            composable("my_animation_page") {
+                MyAnimationPage(
                     { navController.navigate("animated_visibility_page") },
-                    { navController.navigate("animated_content_page") }
+                    { navController.navigate("animated_content_page") },
+                    { navController.navigate("crossfade_page") },
+                    { navController.navigate("animate_xxx_as_state_page") },
+                    { navController.navigate("transition_page") },
+                    { navController.navigate("infinite_transition_page") },
+                    { navController.navigate("animatable_page") },
+                    { navController.navigate("animation_page") },
+                    { navController.navigate("animation_spring_page") },
+                    { navController.navigate("animation_tween_page") },
                 )
             }
             composable("animated_visibility_page") {
@@ -99,6 +111,30 @@ fun HomeNav() {
             }
             composable("animated_content_page") {
                 AnimatedContentPage()
+            }
+            composable("crossfade_page") {
+                CrossfadePage()
+            }
+            composable("animate_xxx_as_state_page") {
+                AnimateXXXAsStatePage()
+            }
+            composable("transition_page") {
+                TransitionPage()
+            }
+            composable("infinite_transition_page") {
+                InfiniteTransitionPage()
+            }
+            composable("animatable_page") {
+                AnimatablePage()
+            }
+            composable("animation_page") {
+                AnimationPage()
+            }
+            composable("animation_spring_page") {
+                SpringPage()
+            }
+            composable("animation_tween_page") {
+                TweenPage()
             }
         }
     }
@@ -184,7 +220,7 @@ fun HomePage(navController: NavHostController) {
             Text(text = "生命周期")
         }
         Button(onClick = {
-            navController.navigate("animation_page")
+            navController.navigate("my_animation_page")
         }) {
             Text(text = "动画")
         }

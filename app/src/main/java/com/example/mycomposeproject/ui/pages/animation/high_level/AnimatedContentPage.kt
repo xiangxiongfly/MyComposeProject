@@ -1,18 +1,18 @@
 package com.example.mycomposeproject.ui.pages.animation.high_level
 
 import androidx.compose.animation.*
-import androidx.compose.animation.core.keyframes
-import androidx.compose.animation.core.tween
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Phone
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.unit.IntSize
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import com.example.mycomposeproject.ui.common.HorizontalDivider
 
 @Composable
 fun AnimatedContentPage() {
@@ -23,8 +23,8 @@ fun AnimatedContentPage() {
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         MyAnimatedContent()
-        Divider()
-        MyMyAnimatedContent2()
+        HorizontalDivider()
+        MyAnimateContentSize()
     }
 }
 
@@ -49,51 +49,29 @@ fun MyAnimatedContent() {
     }
 }
 
-@OptIn(ExperimentalMaterialApi::class, ExperimentalAnimationApi::class)
 @Composable
-fun MyMyAnimatedContent2() {
-    var isExpand by remember { mutableStateOf(false) }
-    Surface(
-        color = Color.Gray,
-        onClick = { isExpand = !isExpand }
-    ) {
-        AnimatedContent(
-            targetState = isExpand,
-            transitionSpec = {
-                fadeIn(animationSpec = tween(150, 150)) with
-                        fadeOut(animationSpec = tween(150)) using
-                        SizeTransform { initialSize, targetSize ->
-                            if (targetState) {
-                                // 展开：先水平方向再垂直方向
-                                keyframes {
-                                    durationMillis = 3000
-                                    IntSize(targetSize.width, initialSize.height) at 1000
-                                }
-                            } else {
-                                // 收起：垂直方向
-                                keyframes {
-                                    durationMillis = 3000
-                                    IntSize(initialSize.width, targetSize.height) at 1000
-                                }
-                            }
-                        }
-            }
-        ) { targetExpand ->
-            if (targetExpand) {
-                Expanded()
-            } else {
-                ContentIcon()
-            }
-        }
+fun MyAnimateContentSize() {
+    val isExpanded = remember {
+        mutableStateOf(true)
     }
-}
-
-@Composable
-fun Expanded() {
-    Text("这是一些内容这是一些内容这是一些内容这是一些内容这是一些内容这是一些内容这是一些内容这是一些内容这是一些内容这是一些内容这是一些内容这是一些内容这是一些内容这是一些内容这是一些内容这是一些内容这是一些内容这是一些内容这是一些内容这是一些内容这是一些内容这是一些内容")
-}
-
-@Composable
-fun ContentIcon() {
-    Icon(Icons.Filled.Phone, null)
+    Column(
+        modifier = Modifier
+            .size(360.dp)
+            .padding(10.dp)
+    ) {
+        Text(
+            text = "床前明月光，疑是地上霜，举头望明月，低头思故乡。床前明月光，疑是地上霜，举头望明月，低头思故乡。床前明月光，疑是地上霜，举头望明月，低头思故乡。",
+            fontSize = 16.sp,
+            textAlign = TextAlign.Justify,
+            overflow = TextOverflow.Ellipsis,
+            modifier = Modifier.animateContentSize(),
+            maxLines = if (isExpanded.value) Int.MAX_VALUE else 2
+        )
+        Text(if (isExpanded.value) "收起" else "全文",
+            color = Color.Blue,
+            modifier = Modifier.clickable {
+                isExpanded.value = !isExpanded.value
+            }
+        )
+    }
 }

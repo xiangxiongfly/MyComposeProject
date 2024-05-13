@@ -6,7 +6,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.Button
-import androidx.compose.material.Divider
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
@@ -14,6 +13,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
+import com.example.mycomposeproject.ui.common.HorizontalDivider
 
 @Composable
 fun AnimatedVisibilityPage() {
@@ -22,7 +22,7 @@ fun AnimatedVisibilityPage() {
             .fillMaxSize()
     ) {
         MyAnimatedVisibility1()
-        Divider()
+        HorizontalDivider()
         MyAnimatedVisibility2()
     }
 }
