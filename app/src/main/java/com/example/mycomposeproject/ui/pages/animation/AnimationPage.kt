@@ -24,6 +24,9 @@ fun MyAnimationPage(
     onClickKeyframesPage: () -> Unit,
     onClickRepeatablePage: () -> Unit,
     onClickSnapPage: () -> Unit,
+    onClickShimmerPage: () -> Unit,
+    onClickFavButtonPage: () -> Unit,
+    onClickSwitchPage: () -> Unit,
 ) {
     Column(
         modifier = Modifier
@@ -71,6 +74,16 @@ fun MyAnimationPage(
         }
         Button(onClick = onClickSnapPage) {
             Text("snap快闪动画")
+        }
+        Text("案例：")
+        Button(onClick = onClickShimmerPage) {
+            Text("骨架屏动画")
+        }
+        Button(onClick = onClickFavButtonPage) {
+            Text("收藏按钮动画")
+        }
+        Button(onClick = onClickSwitchPage) {
+            Text("选中动画")
         }
     }
 }

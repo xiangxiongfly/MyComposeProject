@@ -20,6 +20,9 @@ import com.example.mycomposeproject.ui.pages.animation.high_level.AnimatedConten
 import com.example.mycomposeproject.ui.pages.animation.high_level.AnimatedVisibilityPage
 import com.example.mycomposeproject.ui.pages.animation.high_level.CrossfadePage
 import com.example.mycomposeproject.ui.pages.animation.low_level.*
+import com.example.mycomposeproject.ui.pages.animation.sample.FavButtonPage
+import com.example.mycomposeproject.ui.pages.animation.sample.ShimmerPage
+import com.example.mycomposeproject.ui.pages.animation.sample.SwitchPage
 import com.example.mycomposeproject.ui.pages.animation.spec.*
 import com.example.mycomposeproject.ui.pages.layout.ColumnRowPage
 import com.example.mycomposeproject.ui.pages.layout.ConstraintLayoutPage
@@ -105,7 +108,10 @@ fun HomeNav() {
                     { navController.navigate("animation_tween_page") },
                     { navController.navigate("animation_keyframes_page") },
                     { navController.navigate("animation_repeatable_page") },
-                    { navController.navigate("animation_snap_page") }
+                    { navController.navigate("animation_snap_page") },
+                    { navController.navigate("shimmer_page") },
+                    { navController.navigate("fav_button_page") },
+                    { navController.navigate("switch_page") },
                 )
             }
             composable("animated_visibility_page") {
@@ -146,6 +152,15 @@ fun HomeNav() {
             }
             composable("animation_snap_page") {
                 SnapPage()
+            }
+            composable("shimmer_page") {
+                ShimmerPage()
+            }
+            composable("fav_button_page") {
+                FavButtonPage()
+            }
+            composable("switch_page") {
+                SwitchPage()
             }
         }
     }
