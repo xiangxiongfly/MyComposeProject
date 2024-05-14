@@ -1,9 +1,13 @@
 package com.example.mycomposeproject.ui.pages.animation
 
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Button
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 
 @Composable
 fun MyAnimationPage(
@@ -17,8 +21,15 @@ fun MyAnimationPage(
     onClickAnimationPage: () -> Unit,
     onClickSpringPage: () -> Unit,
     onClickTweenPage: () -> Unit,
+    onClickKeyframesPage: () -> Unit,
+    onClickRepeatablePage: () -> Unit,
+    onClickSnapPage: () -> Unit,
 ) {
-    Column {
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .verticalScroll(rememberScrollState())
+    ) {
         Text("高级别动画：")
         Button(onClick = onClickAnimatedVisibility) {
             Text("AnimatedVisibility")
@@ -51,6 +62,15 @@ fun MyAnimationPage(
         }
         Button(onClick = onClickTweenPage) {
             Text("tween补间动画")
+        }
+        Button(onClick = onClickKeyframesPage) {
+            Text("keyframes关键帧动画")
+        }
+        Button(onClick = onClickRepeatablePage) {
+            Text("repeatable关键帧动画")
+        }
+        Button(onClick = onClickSnapPage) {
+            Text("snap快闪动画")
         }
     }
 }

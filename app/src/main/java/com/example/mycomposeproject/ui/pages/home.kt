@@ -20,8 +20,7 @@ import com.example.mycomposeproject.ui.pages.animation.high_level.AnimatedConten
 import com.example.mycomposeproject.ui.pages.animation.high_level.AnimatedVisibilityPage
 import com.example.mycomposeproject.ui.pages.animation.high_level.CrossfadePage
 import com.example.mycomposeproject.ui.pages.animation.low_level.*
-import com.example.mycomposeproject.ui.pages.animation.spec.SpringPage
-import com.example.mycomposeproject.ui.pages.animation.spec.TweenPage
+import com.example.mycomposeproject.ui.pages.animation.spec.*
 import com.example.mycomposeproject.ui.pages.layout.ColumnRowPage
 import com.example.mycomposeproject.ui.pages.layout.ConstraintLayoutPage
 import com.example.mycomposeproject.ui.pages.layout.SurfacePage
@@ -104,6 +103,9 @@ fun HomeNav() {
                     { navController.navigate("animation_page") },
                     { navController.navigate("animation_spring_page") },
                     { navController.navigate("animation_tween_page") },
+                    { navController.navigate("animation_keyframes_page") },
+                    { navController.navigate("animation_repeatable_page") },
+                    { navController.navigate("animation_snap_page") }
                 )
             }
             composable("animated_visibility_page") {
@@ -135,6 +137,15 @@ fun HomeNav() {
             }
             composable("animation_tween_page") {
                 TweenPage()
+            }
+            composable("animation_keyframes_page") {
+                KeyframesPage()
+            }
+            composable("animation_repeatable_page") {
+                RepeatablePage()
+            }
+            composable("animation_snap_page") {
+                SnapPage()
             }
         }
     }
