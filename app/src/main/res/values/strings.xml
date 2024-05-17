@@ -2,4 +2,5 @@
     <string name="app_name">MyComposeProject</string>
     <string name="app_text">这是一些文字</string>
     <string name="poet">床前明月光，疑是地上霜，举头望明月，低头思故乡</string>
+    <string name="poet2">床前明月光，疑是地上霜，举头望明月，低头思故乡\n床前明月光，疑是地上霜，举头望明月，低头思故乡\n床前明月光，疑是地上霜，举头望明月，低头思故乡\n床前明月光，疑是地上霜，举头望明月，低头思故乡</string>
 </resources>
