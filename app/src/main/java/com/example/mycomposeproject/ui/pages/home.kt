@@ -15,6 +15,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.compose.NestedScrollPage
 import com.example.mycomposeproject.ui.pages.animation.MyAnimationPage
 import com.example.mycomposeproject.ui.pages.animation.high_level.AnimatedContentPage
 import com.example.mycomposeproject.ui.pages.animation.high_level.AnimatedVisibilityPage
@@ -24,6 +25,7 @@ import com.example.mycomposeproject.ui.pages.animation.sample.FavButtonPage
 import com.example.mycomposeproject.ui.pages.animation.sample.ShimmerPage
 import com.example.mycomposeproject.ui.pages.animation.sample.SwitchPage
 import com.example.mycomposeproject.ui.pages.animation.spec.*
+import com.example.mycomposeproject.ui.pages.event.*
 import com.example.mycomposeproject.ui.pages.layout.ColumnRowPage
 import com.example.mycomposeproject.ui.pages.layout.ConstraintLayoutPage
 import com.example.mycomposeproject.ui.pages.layout.SurfacePage
@@ -162,6 +164,34 @@ fun HomeNav() {
             composable("switch_page") {
                 SwitchPage()
             }
+            composable("event_page") {
+                EventPage(
+                    { navController.navigate("click_page") },
+                    { navController.navigate("draggable_page") },
+                    { navController.navigate("swipeable_page") },
+                    { navController.navigate("transformable_page") },
+                    { navController.navigate("scroll_page") },
+                    { navController.navigate("nested_scroll_page") },
+                )
+            }
+            composable("click_page") {
+                ClickPage()
+            }
+            composable("draggable_page") {
+                DraggablePage()
+            }
+            composable("swipeable_page") {
+                SwipeablePage()
+            }
+            composable("transformable_page") {
+                TransformablePage()
+            }
+            composable("scroll_page") {
+                ScrollPage()
+            }
+            composable("nested_scroll_page") {
+                NestedScrollPage()
+            }
         }
     }
 }
@@ -249,6 +279,11 @@ fun HomePage(navController: NavHostController) {
             navController.navigate("my_animation_page")
         }) {
             Text(text = "动画")
+        }
+        Button(onClick = {
+            navController.navigate("event_page")
+        }) {
+            Text(text = "事件")
         }
     }
 }
