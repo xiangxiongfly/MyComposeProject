@@ -15,7 +15,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.example.compose.NestedScrollPage
+import com.example.mycomposeproject.ui.pages.event.NestedScrollPage
 import com.example.mycomposeproject.ui.pages.animation.MyAnimationPage
 import com.example.mycomposeproject.ui.pages.animation.high_level.AnimatedContentPage
 import com.example.mycomposeproject.ui.pages.animation.high_level.AnimatedVisibilityPage

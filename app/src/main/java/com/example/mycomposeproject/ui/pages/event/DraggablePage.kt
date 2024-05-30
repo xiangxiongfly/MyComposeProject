@@ -51,11 +51,27 @@ fun MyDetectDragGestures() {
             modifier = Modifier
                 .offset { IntOffset(offsetX.value.toInt(), offsetY.value.toInt()) }
                 .pointerInput(Unit) {
+                    // 监听任意方向的拖动手势：
                     detectDragGestures { change, dragAmount ->
-                        change.consume()
                         offsetX.value += dragAmount.x
                         offsetY.value += dragAmount.y
                     }
+
+                    // 监听水平拖动手势：
+//                    detectHorizontalDragGestures { change, dragAmount ->
+//                        offsetX.value += dragAmount
+//                    }
+
+                    // 监听垂直拖动手势：
+//                    detectVerticalDragGestures { change, dragAmount ->
+//                        offsetY.value += dragAmount
+//                    }
+
+                    // 监听长按后的拖动手势：
+//                    detectDragGesturesAfterLongPress { change, dragAmount ->
+//                        offsetX.value += dragAmount.x
+//                        offsetY.value += dragAmount.y
+//                    }
                 }
         )
     }

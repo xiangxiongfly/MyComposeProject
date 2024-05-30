@@ -1,4 +1,4 @@
-package com.example.compose
+package com.example.mycomposeproject.ui.pages.event
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -24,17 +24,15 @@ fun NestedScrollPage() {
 
 @Composable
 fun MyNestedScroll() {
-    val toolbarHeight = 48.dp
-    val toolbarHeightPx = with(LocalDensity.current) {
-        toolbarHeight.roundToPx().toFloat()
-    }
-    val toolbarOffsetHeightPx = remember { mutableStateOf(0f) }
+    val toolbarHeight = 80.dp
+    val toolbarHeightPx = with(LocalDensity.current) { toolbarHeight.roundToPx().toFloat() }
+    val toolbarOffsetHeightPx = remember { mutableStateOf(0F) }
     val nestedScrollConnection = remember {
         object : NestedScrollConnection {
             override fun onPreScroll(available: Offset, source: NestedScrollSource): Offset {
-                val delta = available.y
+                val delta = available.y // 每次滑动的偏移值
                 val newOffset = toolbarOffsetHeightPx.value + delta
-                toolbarOffsetHeightPx.value = newOffset.coerceIn(-toolbarHeightPx, 0f)
+                toolbarOffsetHeightPx.value = newOffset.coerceIn(-toolbarHeightPx, 0F)
                 return Offset.Zero
             }
         }
@@ -47,7 +45,8 @@ fun MyNestedScroll() {
         LazyColumn(contentPadding = PaddingValues(top = toolbarHeight)) {
             items(100) { index ->
                 Text(
-                    "I'm item $index", modifier = Modifier
+                    "I'm item $index",
+                    modifier = Modifier
                         .fillMaxWidth()
                         .padding(16.dp)
                 )
@@ -61,5 +60,3 @@ fun MyNestedScroll() {
         )
     }
 }
-
-
