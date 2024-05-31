@@ -15,22 +15,24 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.core.view.WindowCompat
 import com.example.mycomposeproject.R
 import com.example.mycomposeproject.ui.pages.FourPage
 import com.example.mycomposeproject.ui.pages.HomeNav
+import com.example.mycomposeproject.ui.pages.OthersNav
 import com.example.mycomposeproject.ui.pages.ThreePage
-import com.example.mycomposeproject.ui.pages.TwoPage
 import com.example.mycomposeproject.ui.theme.MyComposeProjectTheme
 import kotlinx.coroutines.launch
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        WindowCompat.setDecorFitsSystemWindows(window, false)
         setContent {
             val scaffoldState = rememberScaffoldState()
             val scope = rememberCoroutineScope()
             val tabs = Tabs.values()
-            var selectedPosition by remember { mutableStateOf(Tabs.HOME) }
+            var selectedPosition by remember { mutableStateOf(Tabs.OTHERS) }
             var title by remember { mutableStateOf(selectedPosition.title) }
             MyComposeProjectTheme {
                 Surface(
@@ -78,7 +80,7 @@ class MainActivity : ComponentActivity() {
                         Box(modifier = Modifier.padding(paddingValues)) {
                             when (selectedPosition) {
                                 Tabs.HOME -> HomeNav()
-                                Tabs.TWO -> TwoPage()
+                                Tabs.OTHERS -> OthersNav()
                                 Tabs.THREE -> ThreePage()
                                 Tabs.FOUR -> FourPage()
                             }
@@ -102,7 +104,7 @@ enum class Tabs(
     @DrawableRes val iconRes: Int
 ) {
     HOME("home", R.mipmap.ic_home),
-    TWO("two", R.mipmap.ic_two),
+    OTHERS("others", R.mipmap.ic_others),
     THREE("three", R.mipmap.ic_three),
     FOUR("four", R.mipmap.ic_four);
 }
