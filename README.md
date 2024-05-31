@@ -55,9 +55,19 @@
     - infiniteRepeatable
     - snap
 
+### 其他
+
+- CompositionLocal
+- 手势事件
+- 屏幕适配
+- 生命周期和函数
+- 状态管理
+
 ### accompanist
 
 - SystemUiController
 - Pager
+- SwipeRefresh
+- FlowLayout
 
 ## bloom

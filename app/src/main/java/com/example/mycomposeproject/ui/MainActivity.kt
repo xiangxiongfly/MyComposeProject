@@ -15,7 +15,6 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
-import androidx.core.view.WindowCompat
 import com.example.mycomposeproject.R
 import com.example.mycomposeproject.ui.pages.FourPage
 import com.example.mycomposeproject.ui.pages.HomeNav
@@ -27,12 +26,11 @@ import kotlinx.coroutines.launch
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        WindowCompat.setDecorFitsSystemWindows(window, false)
         setContent {
             val scaffoldState = rememberScaffoldState()
             val scope = rememberCoroutineScope()
             val tabs = Tabs.values()
-            var selectedPosition by remember { mutableStateOf(Tabs.OTHERS) }
+            var selectedPosition by remember { mutableStateOf(Tabs.HOME) }
             var title by remember { mutableStateOf(selectedPosition.title) }
             MyComposeProjectTheme {
                 Surface(
